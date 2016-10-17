@@ -188,6 +188,7 @@
             this.CancelDel.Text = "Cancel";
             this.CancelDel.UseVisualStyleBackColor = true;
             this.CancelDel.Visible = false;
+            this.CancelDel.Click += new System.EventHandler(this.CancelDel_Click);
             // 
             // DelNum
             // 

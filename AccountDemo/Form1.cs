@@ -63,6 +63,8 @@ namespace AccountDemo
                 if (!accounts.Contains(num)) // Test the number if it is in the list
                 {
                     accounts.Add(num); // Add the new number
+                    listAccounts.Items.Add(num);
+                    listAccounts.Refresh();
                     add.Visible = false;
                     cancel.Visible = false;
                     tbxNewNum.Visible = false;
@@ -80,11 +82,8 @@ namespace AccountDemo
                 }
             }
             else
-            {
                 MessageBox.Show("Mising or not numeric", "Add New",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            Refresh();
         }
 
         private void cancel_Click(object sender, EventArgs e)
@@ -114,10 +113,8 @@ namespace AccountDemo
                 Verification(v);
             }
             else
-            {
                 MessageBox.Show("Mising or not numeric", "Add New",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void cancelVer_Click(object sender, EventArgs e)
@@ -151,14 +148,25 @@ namespace AccountDemo
                     {
                         int b = int.Parse(tbxDelNum.Text);
                         accounts.Remove(b);
+                        listAccounts.Items.Remove(b);
+                        listAccounts.Refresh();
                     }
                 }
             }
             else
-            {
                 MessageBox.Show("Mising or not numeric", "Add New",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+           listAccounts.Refresh();
+        }
+
+        private void CancelDel_Click(object sender, EventArgs e)
+        {
+            btmVer.Visible = true;
+            btmDel.Visible = true;
+            tbxDelNum.Visible = false;
+            DelNum.Visible = false;
+            CancelDel.Visible = false;
         }
 
         private void btmClear_Click(object sender, EventArgs e)
@@ -168,6 +176,7 @@ namespace AccountDemo
             if (t == DialogResult.Yes)
             {
                 accounts.Clear();
+                listAccounts.Items.Clear();
                 listAccounts.Refresh();
             }
         }
@@ -185,19 +194,19 @@ namespace AccountDemo
 
         private bool Verification(int a)
         {
-            if (!accounts.Contains(a))
+            if (accounts.Contains(a))
             {
-                MessageBox.Show("Account Number does not exist.", "Account Verification",
+                MessageBox.Show("Account Number exist.", "Account Verification",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
             else
             {
-                MessageBox.Show("Account Number exits.", "Account Verification",
+               MessageBox.Show("Account Number does not exits.", "Account Verification",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
                 return false;
             }
         }
-
     }
 }
