@@ -53,6 +53,8 @@ namespace AccountDemo
             add.Visible = true;
             cancel.Visible = true;
             btmVer.Visible = false;
+            btmDel.Enabled = false;
+            btmClear.Enabled = false;
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -70,6 +72,8 @@ namespace AccountDemo
                     tbxNewNum.Visible = false;
                     btmAdd.Visible = true;
                     btmVer.Visible = true;
+                    btmDel.Enabled = true;
+                    btmClear.Enabled = true;
                 }
                 else
                 {
@@ -93,6 +97,9 @@ namespace AccountDemo
             cancel.Visible = false;
             btmAdd.Visible = true;
             btmVer.Visible = true;
+            btmDel.Enabled = true;
+            btmDel.Enabled = true;
+            btmClear.Enabled = true;
         }
 
         private void btmVer_Click(object sender, EventArgs e)
@@ -102,6 +109,8 @@ namespace AccountDemo
             cancelVer.Visible = true;
             btmAdd.Visible = false;
             btmVer.Visible = false;
+            btmDel.Enabled = false;
+            btmClear.Enabled = false;
 
         }
 
@@ -124,10 +133,14 @@ namespace AccountDemo
             tbxVerN.Visible = false;
             verify.Visible = false;
             cancelVer.Visible = false;
+            btmDel.Enabled = true;
+            btmClear.Enabled = true;
         }
 
         private void btmDel_Click(object sender, EventArgs e)
         {
+            btmAdd.Enabled = false;
+            btmClear.Enabled = false;
             btmVer.Visible = false;
             btmDel.Visible = false;
             tbxDelNum.Visible = true;
@@ -150,23 +163,31 @@ namespace AccountDemo
                         accounts.Remove(b);
                         listAccounts.Items.Remove(b);
                         listAccounts.Refresh();
+
+                        btmAdd.Enabled = true;
+                        btmVer.Visible = true;
+                        btmDel.Visible = true;
+                        tbxDelNum.Visible = false;
+                        DelNum.Visible = false;
+                        CancelDel.Visible = false;
+                        btmClear.Enabled = true;
                     }
                 }
             }
             else
                 MessageBox.Show("Mising or not numeric", "Add New",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-           listAccounts.Refresh();
         }
 
         private void CancelDel_Click(object sender, EventArgs e)
         {
+            btmAdd.Enabled = true;
             btmVer.Visible = true;
             btmDel.Visible = true;
             tbxDelNum.Visible = false;
             DelNum.Visible = false;
             CancelDel.Visible = false;
+            btmClear.Enabled = true;
         }
 
         private void btmClear_Click(object sender, EventArgs e)
